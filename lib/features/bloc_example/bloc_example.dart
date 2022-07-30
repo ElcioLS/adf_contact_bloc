@@ -11,10 +11,17 @@ class BlocExample extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Bloc Example'),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          context
+              .read<ExampleBloc>()
+              .add(ExampleAddNameEvent(name: 'Adiciona Texto'));
+        },
+      ),
       body: BlocListener<ExampleBloc, ExampleState>(
         listenWhen: (previous, current) {
-          if (previous is ExampleStateInitial && current is ExampleStateData) {
-            if (current.names.length > 3) {
+          if (previous is ExampleStateData && current is ExampleStateData) {
+            if (current.names.length > 8) {
               return true;
             }
           }
@@ -34,9 +41,9 @@ class BlocExample extends StatelessWidget {
           children: [
             BlocConsumer<ExampleBloc, ExampleState>(
               buildWhen: (previous, current) {
-                if (previous is ExampleStateInitial &&
+                if (previous is ExampleStateData &&
                     current is ExampleStateData) {
-                  if (current.names.length > 3) {
+                  if (current.names.length > 8) {
                     return true;
                   }
                 }
