@@ -27,6 +27,12 @@ class HomePage extends StatelessWidget {
               },
               child: const Text('Example freezed'),
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/contacts/list');
+              },
+              child: const Text('Contact List'),
+            ),
           ],
         ),
       )),
