@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 class ContactsRepository {
   Future<List<ContactModel>> findAll() async {
-    final response = await Dio().get('http://localhost:3031/contacts');
+    final response = await Dio().get('http://192.168.0.5:3031/contacts');
 
     return response.data
         ?.map<ContactModel>((contact) => ContactModel.fromMap(contact))
@@ -11,12 +11,11 @@ class ContactsRepository {
   }
 
   Future<void> create(ContactModel model) =>
-      Dio().post('http://localhost:3031/contacts', data: model.toMap());
+      Dio().post('http://192.168.0.5:3031/contacts', data: model.toMap());
 
   Future<void> update(ContactModel model) => Dio()
-      .put('http://localhost:3031/contacts/${model.id}', data: model.toMap());
+      .put('http://192.168.0.5:3031/contacts/${model.id}', data: model.toMap());
 
   Future<void> delete(ContactModel model) =>
-      Dio().delete('http://localhost:3031/contacts/${model.id}',
-          data: model.toMap());
+      Dio().delete('http://192.168.0.5:3031/contacts/${model.id}');
 }
