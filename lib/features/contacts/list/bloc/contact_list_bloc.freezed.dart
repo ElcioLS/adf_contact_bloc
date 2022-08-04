@@ -21,6 +21,12 @@ class _$ContactListEventTearOff {
   _ContactListEventFindAll findAll() {
     return _ContactListEventFindAll();
   }
+
+  _ContactListEventDelete delete({required ContactModel del}) {
+    return _ContactListEventDelete(
+      del: del,
+    );
+  }
 }
 
 /// @nodoc
@@ -31,32 +37,38 @@ mixin _$ContactListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() findAll,
+    required TResult Function(ContactModel del) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? findAll,
+    TResult Function(ContactModel del)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? findAll,
+    TResult Function(ContactModel del)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ContactListEventFindAll value) findAll,
+    required TResult Function(_ContactListEventDelete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ContactListEventFindAll value)? findAll,
+    TResult Function(_ContactListEventDelete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ContactListEventFindAll value)? findAll,
+    TResult Function(_ContactListEventDelete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -122,6 +134,7 @@ class _$_ContactListEventFindAll implements _ContactListEventFindAll {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() findAll,
+    required TResult Function(ContactModel del) delete,
   }) {
     return findAll();
   }
@@ -130,6 +143,7 @@ class _$_ContactListEventFindAll implements _ContactListEventFindAll {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? findAll,
+    TResult Function(ContactModel del)? delete,
   }) {
     return findAll?.call();
   }
@@ -138,6 +152,7 @@ class _$_ContactListEventFindAll implements _ContactListEventFindAll {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? findAll,
+    TResult Function(ContactModel del)? delete,
     required TResult orElse(),
   }) {
     if (findAll != null) {
@@ -150,6 +165,7 @@ class _$_ContactListEventFindAll implements _ContactListEventFindAll {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_ContactListEventFindAll value) findAll,
+    required TResult Function(_ContactListEventDelete value) delete,
   }) {
     return findAll(this);
   }
@@ -158,6 +174,7 @@ class _$_ContactListEventFindAll implements _ContactListEventFindAll {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_ContactListEventFindAll value)? findAll,
+    TResult Function(_ContactListEventDelete value)? delete,
   }) {
     return findAll?.call(this);
   }
@@ -166,6 +183,7 @@ class _$_ContactListEventFindAll implements _ContactListEventFindAll {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_ContactListEventFindAll value)? findAll,
+    TResult Function(_ContactListEventDelete value)? delete,
     required TResult orElse(),
   }) {
     if (findAll != null) {
@@ -177,6 +195,142 @@ class _$_ContactListEventFindAll implements _ContactListEventFindAll {
 
 abstract class _ContactListEventFindAll implements ContactListEvent {
   factory _ContactListEventFindAll() = _$_ContactListEventFindAll;
+}
+
+/// @nodoc
+abstract class _$ContactListEventDeleteCopyWith<$Res> {
+  factory _$ContactListEventDeleteCopyWith(_ContactListEventDelete value,
+          $Res Function(_ContactListEventDelete) then) =
+      __$ContactListEventDeleteCopyWithImpl<$Res>;
+  $Res call({ContactModel del});
+}
+
+/// @nodoc
+class __$ContactListEventDeleteCopyWithImpl<$Res>
+    extends _$ContactListEventCopyWithImpl<$Res>
+    implements _$ContactListEventDeleteCopyWith<$Res> {
+  __$ContactListEventDeleteCopyWithImpl(_ContactListEventDelete _value,
+      $Res Function(_ContactListEventDelete) _then)
+      : super(_value, (v) => _then(v as _ContactListEventDelete));
+
+  @override
+  _ContactListEventDelete get _value => super._value as _ContactListEventDelete;
+
+  @override
+  $Res call({
+    Object? del = freezed,
+  }) {
+    return _then(_ContactListEventDelete(
+      del: del == freezed
+          ? _value.del
+          : del // ignore: cast_nullable_to_non_nullable
+              as ContactModel,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_ContactListEventDelete implements _ContactListEventDelete {
+  _$_ContactListEventDelete({required this.del});
+
+  @override
+  final ContactModel del;
+
+  @override
+  String toString() {
+    return 'ContactListEvent.delete(del: $del)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _ContactListEventDelete &&
+            const DeepCollectionEquality().equals(other.del, del));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(del));
+
+  @JsonKey(ignore: true)
+  @override
+  _$ContactListEventDeleteCopyWith<_ContactListEventDelete> get copyWith =>
+      __$ContactListEventDeleteCopyWithImpl<_ContactListEventDelete>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() findAll,
+    required TResult Function(ContactModel del) delete,
+  }) {
+    return delete(del);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult Function()? findAll,
+    TResult Function(ContactModel del)? delete,
+  }) {
+    return delete?.call(del);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? findAll,
+    TResult Function(ContactModel del)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(del);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_ContactListEventFindAll value) findAll,
+    required TResult Function(_ContactListEventDelete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult Function(_ContactListEventFindAll value)? findAll,
+    TResult Function(_ContactListEventDelete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_ContactListEventFindAll value)? findAll,
+    TResult Function(_ContactListEventDelete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ContactListEventDelete implements ContactListEvent {
+  factory _ContactListEventDelete({required ContactModel del}) =
+      _$_ContactListEventDelete;
+
+  ContactModel get del;
+  @JsonKey(ignore: true)
+  _$ContactListEventDeleteCopyWith<_ContactListEventDelete> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
