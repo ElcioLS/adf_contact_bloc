@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pushNamed('/contacts/cubit/list');
+                Navigator.of(context).pushNamed('/contacts/list/cubit');
               },
               child: const Text('Contact Cubit List'),
             ),

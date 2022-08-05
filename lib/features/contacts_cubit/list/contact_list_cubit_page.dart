@@ -1,4 +1,4 @@
-import 'package:adf_contact_bloc/features/contacts_cubit/cubit/contact_list_cubit.dart';
+import 'package:adf_contact_bloc/features/contacts_cubit/list/cubit/contact_list_cubit.dart';
 import 'package:adf_contact_bloc/models/contact_model.dart';
 import 'package:adf_contact_bloc/widgets/loader.dart';
 import 'package:flutter/material.dart';
@@ -38,19 +38,20 @@ class ContactListCubitPage extends StatelessWidget {
                     },
                     builder: (_, contacts) {
                       return ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: contacts.length,
-                          itemBuilder: (_, index) {
-                            final contact = contacts[index];
-                            return ListTile(
-                              onLongPress: () => context
-                                  .read<ContactListCubit>()
-                                  .deleteModel(contact),
-                              title: Text(contact.name),
-                              subtitle: Text(contact.email),
-                            );
-                          });
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: contacts.length,
+                        itemBuilder: (_, index) {
+                          final contact = contacts[index];
+                          return ListTile(
+                            onLongPress: () => context
+                                .read<ContactListCubit>()
+                                .deleteModel(contact),
+                            title: Text(contact.name),
+                            subtitle: Text(contact.email),
+                          );
+                        },
+                      );
                     },
                   ),
                 ],
