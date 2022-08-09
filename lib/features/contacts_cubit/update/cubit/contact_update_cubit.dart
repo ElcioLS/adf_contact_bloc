@@ -7,34 +7,28 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'contact_update_cubit.freezed.dart';
-part 'contact_update_cubit_state.dart';
+part 'contact_update_state.dart';
 
-class ContactUpdateCubit extends Cubit<ContactUpdateCubitState> {
-  final ContactsRepository _contactsRepository;
+class ContactUpdateCubit extends Cubit<ContactUpdateState> {
+  final ContactsRepository _repository;
+  ContactUpdateCubit({required ContactsRepository repository})
+      : _repository = repository,
+        super(const ContactUpdateState.initial());
 
-  ContactUpdateCubit({required ContactsRepository contactsRepository})
-      : _contactsRepository = contactsRepository,
-        super(_Initial());
-  on<_Save>(_save) {
-    Future<FutureOr<void>> _save(
-        event, Emitter<ContactUpdateCubitState> emit) async {
-      try {
-        emit(ContactUpdateCubitState.loading());
-        final model = ContactModel(
-          id: event.id,
-          name: event.name,
-          email: event.email,
-        );
+  Future<void> save(ContactModel contact) async {
+    try {
+      emit(const ContactUpdateState.loading());
 
-        await _contactsRepository.update(model);
-        emit(ContactUpdateCubitState.success());
-      } catch (e, s) {
-        log(
-          'Erro ao atualizar contato',
-          error: e,
-          stackTrace: s,
-        );
-      }
+      await _repository.update(contact);
+
+      await Future.delayed(const Duration(seconds: 1));
+
+      emit(const ContactUpdateState.success());
+    } on Exception catch (e, s) {
+      log("Erro ao atualizar contato", error: e, stackTrace: s);
+
+      emit(
+          const ContactUpdateState.error(message: "Erro ao atualizar contato"));
     }
   }
 }

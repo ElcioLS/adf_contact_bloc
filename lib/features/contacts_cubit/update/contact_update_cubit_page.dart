@@ -36,83 +36,99 @@ class _ContactUpdateCubitPageState extends State<ContactUpdateCubitPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Atualizar contatos'),
+        title: const Text('Atualizar contatos Cubit'),
       ),
-      body: BlocListener<ContactUpdateCubit, ContactUpdateCubitState>(
+      body: BlocListener<ContactUpdateCubit, ContactUpdateState>(
         listener: (context, state) {
           state.whenOrNull(
-            success: () => Navigator.of(context).pop(),
+            success: () {
+              Navigator.of(context).pop();
+            },
             error: (message) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  backgroundColor: Colors.red,
                   content: Text(
                     message,
                     style: const TextStyle(
                       color: Colors.white,
                     ),
                   ),
+                  backgroundColor: Colors.red,
                 ),
               );
             },
           );
         },
+        listenWhen: (previous, current) {
+          return current.maybeWhen(
+            error: (_) => true,
+            success: () => true,
+            orElse: () => false,
+          );
+        },
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(20.0),
           child: Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _nameEC,
-                    decoration: const InputDecoration(
-                      label: Text('Nome'),
+            key: _formKey,
+            child: Column(
+              children: [
+                Loader<ContactUpdateCubit, ContactUpdateState>(
+                    selector: (state) {
+                  return state.maybeWhen(
+                    loading: () => true,
+                    orElse: () => false,
+                  );
+                }),
+                TextFormField(
+                  controller: _nameEC,
+                  decoration: const InputDecoration(
+                    label: Text(
+                      "Nome",
                     ),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Nome é obrigatório!';
-                      }
-                      return null;
-                    },
                   ),
-                  TextFormField(
-                    controller: _emailEC,
-                    decoration: const InputDecoration(
-                      label: Text('e-mail'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Nome é Obrigatório";
+                    }
+
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: _emailEC,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
+                    label: Text(
+                      "Email",
                     ),
-                    validator: (String? value) {
-                      if (value == null || value.isEmpty) {
-                        return 'E-mail é obrigatório!';
-                      }
-                      return null;
-                    },
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      final validate =
-                          _formKey.currentState?.validate() ?? false;
-                        context.read<ContactUpdateCubit>().add
-                        // context
-                        //     .read<ContactUpdateCubit>()
-                        //     .emit(ContactUpdateCubitState
-                        //     .save(
-                        //       id: widget.contact.id!,
-                        //       name: _nameEC.text,
-                        //       email: _emailEC.text,
-                        //     ));
-                      }
-                    },
-                    child: const Text('Salvar'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Email é Obrigatório";
+                    }
+
+                    return null;
+                  },
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    final validate = _formKey.currentState?.validate() ?? false;
+
+                    if (validate) {
+                      context.read<ContactUpdateCubit>().save(ContactModel(
+                            id: widget.contact.id,
+                            name: _nameEC.text,
+                            email: _emailEC.text,
+                          ));
+                    }
+                  },
+                  child: const Text(
+                    "Salvar",
                   ),
-                  Loader<ContactUpdateCubit, ContactUpdateCubitState>(
-                      selector: (state) {
-                    return state.maybeWhen(
-                      loading: () => true,
-                      orElse: () => false,
-                    );
-                  })
-                ],
-              )),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

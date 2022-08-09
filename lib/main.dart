@@ -10,6 +10,7 @@ import 'package:adf_contact_bloc/features/contacts/update/bloc/bloc/contact_upda
 import 'package:adf_contact_bloc/features/contacts/update/contact_update_page.dart';
 import 'package:adf_contact_bloc/features/contacts_cubit/list/contact_list_cubit_page.dart';
 import 'package:adf_contact_bloc/features/contacts_cubit/list/cubit/contact_list_cubit.dart';
+import 'package:adf_contact_bloc/features/contacts_cubit/update/contact_update_cubit_page.dart';
 import 'package:adf_contact_bloc/features/contacts_cubit/update/cubit/contact_update_cubit.dart';
 import 'package:adf_contact_bloc/home/home_page.dart';
 import 'package:adf_contact_bloc/models/contact_model.dart';
@@ -75,41 +76,17 @@ class MyApp extends StatelessWidget {
               child: const ContactListCubitPage(),
             );
           },
-          '/contacts/update/cubit': (context) {
+          '/contact/update/cubit/': (context) {
             final contact =
                 ModalRoute.of(context)!.settings.arguments as ContactModel;
+
             return BlocProvider(
               create: (context) => ContactUpdateCubit(
-                  contactsRepository: context.read()..update(contact)),
-              child: ContactUpdatePage(
-                contact: contact,
+                repository: context.read<ContactsRepository>(),
               ),
+              child: ContactUpdateCubitPage(contact: contact),
             );
           }
-          // '/contacts/update/cubit': (context) {
-          //   return BlocProvider(
-          //     create: (context) => ContactListCubit(
-          //       repository: context.read(),
-          //     ).
-          //     child: ContactUpdateCubit(),
-          //   );
-          // }
-          // '/contacts/update/cubit': (context) {
-          //           final contact =
-          //               ModalRoute.of(context)!.settings.arguments as ContactModel;
-          //           return ContactUpdateCubitPage(contact: contact);
-          //         }
-
-          // '/contacts/update/cubit': (context) {
-          //   final contact =
-          //       ModalRoute.of(context)!.settings.arguments as ContactModel;
-          //   return BlocProvider(
-          //     create: (context) => ContactUpdateCubit(
-          //       contactsRepository: context.read()..findAll(),
-          //     ),
-          //     child: ContactUpdateCubitPage(contact: contact),
-          //   );
-          // }
         },
       ),
     );
