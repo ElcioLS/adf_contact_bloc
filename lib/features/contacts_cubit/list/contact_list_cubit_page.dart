@@ -56,6 +56,11 @@ class ContactListCubitPage extends StatelessWidget {
                                 .deleteModel(contact),
                             title: Text(contact.name),
                             subtitle: Text(contact.email),
+                            onTap: () async => await Navigator.pushNamed(
+                              context,
+                              '/contacts/update/cubit',
+                              arguments: contacts,
+                            ),
                           );
                         },
                       );
